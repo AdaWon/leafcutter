@@ -28,7 +28,8 @@ if (!file.exists(groups_file)) stop("File ",groups_file," does not exist")
 meta=read.table(groups_file, header=F, stringsAsFactors = F)
 colnames(meta)[1:2]=c("sample","group")
 
-counts=counts[,meta$sample]
+#counts=counts[,meta$sample]
+counts=counts[,match(meta$sample, colnames(counts))]
 
 meta$group=as.factor(meta$group)
 group_names=levels(meta$group)
